@@ -130,4 +130,5 @@ forever(function () {
     brick.showNumber(sensors.color2.light(LightIntensityMode.Reflected), 4)
     brick.showString("Gyro 3", 5)
     brick.showNumber(sensors.gyro3.angle(), 6)
+    brick.showString("Jan je heker", 7)
 })
