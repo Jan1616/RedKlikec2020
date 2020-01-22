@@ -123,3 +123,4 @@ forever(function () {
     brick.showNumber(sensors.gyro3.angle(), 6)
 })
 //Zdravo, test a se vidi?
+//A dela?
