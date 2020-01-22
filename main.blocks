@@ -1,0 +1,1032 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="" id="rm1V~BuVr+busDAfKc5C">moc3</variable>
+  </variables>
+  <block type="pxt-on-start" x="20" y="20">
+    <statement name="HANDLER">
+      <block type="typescript_statement" editable="false">
+        <mutation line0="let popravek = 0" numlines="1" declaredvars="popravek"></mutation>
+        <field name="LINE0">let popravek = 0</field>
+        <next>
+          <block type="typescript_statement" editable="false">
+            <mutation line0="let moc = 0" numlines="1" declaredvars="moc"></mutation>
+            <field name="LINE0">let moc = 0</field>
+            <next>
+              <block type="typescript_statement" editable="false">
+                <mutation line0="let svetlost = 0" numlines="1" declaredvars="svetlost"></mutation>
+                <field name="LINE0">let svetlost = 0</field>
+                <next>
+                  <block type="typescript_statement" editable="false">
+                    <mutation line0="let i = 0" numlines="1" declaredvars="i"></mutation>
+                    <field name="LINE0">let i = 0</field>
+                    <next>
+                      <block type="typescript_statement" editable="false">
+                        <mutation line0="let senzor = 0" numlines="1" declaredvars="senzor"></mutation>
+                        <field name="LINE0">let senzor = 0</field>
+                        <next>
+                          <block type="variables_set">
+                            <field name="VAR" id="rm1V~BuVr+busDAfKc5C" variabletype="">moc3</field>
+                            <value name="VALUE">
+                              <shadow type="math_number">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="gyroCalibrate">
+                                <field name="this">sensors.gyro3</field>
+                                <next>
+                                  <block type="typescript_statement" editable="false">
+                                    <mutation line0="function pospesevanje(maxmoc: number) { // na vrhu napišeš do katere moči mora pospeševati. " line1="    while (moc &lt; maxmoc) {" line2="        motors.largeBC.setBrake(false)" line3="        motors.largeBC.tank(moc, moc) //Moč motorjev natavi na 0. " line4="        moc = moc + 2 //Nato pa pospeši za dva. " line5="        control.waitMicros(30000) // počaka 30000 mikrosekunde( to je 0.03 sekunde) in nato vse spet ponovi. " line6="        // To dela dokler ni pospešil do dane moči ki smo jo prej napisali. " line7="    }" line8="}" numlines="9"></mutation>
+                                    <field name="LINE0">function pospesevanje(maxmoc: number) { // na vrhu napišeš do katere moči mora pospeševati. </field>
+                                    <field name="LINE1">    while (moc &lt; maxmoc) {</field>
+                                    <field name="LINE2">        motors.largeBC.setBrake(false)</field>
+                                    <field name="LINE3">        motors.largeBC.tank(moc, moc) //Moč motorjev natavi na 0. </field>
+                                    <field name="LINE4">        moc = moc + 2 //Nato pa pospeši za dva. </field>
+                                    <field name="LINE5">        control.waitMicros(30000) // počaka 30000 mikrosekunde( to je 0.03 sekunde) in nato vse spet ponovi. </field>
+                                    <field name="LINE6">        // To dela dokler ni pospešil do dane moči ki smo jo prej napisali. </field>
+                                    <field name="LINE7">    }</field>
+                                    <field name="LINE8">}</field>
+                                    <next>
+                                      <block type="typescript_statement" editable="false">
+                                        <mutation line0="function vozi_ravno(cm: number) {//zgor napišeš koliko cm naj pelje" line1="    motors.resetAll()//resetira vse motorje" line2="    while (Math.abs(motors.largeB.angle()) &lt; 360 * (cm / 29)) {//zračuna cm" line3="        popravek = sensors.gyro3.angle() * 1.5 //popravek je enak kotu gyro senzorja 3" line4="        motors.largeBC.steer(popravek, 25)//kot popravka napiše not in vozi z močjo 30" line5="        brick.showString(&quot;Popravek&quot;, 7)" line6="        brick.showNumber(popravek, 8)//na koci pokaže popravek" line7="" line8="    }" line9="    motors.stopAll()" line10="    motors.largeBC.setBrake(true)" line11="}" numlines="12"></mutation>
+                                        <field name="LINE0">function vozi_ravno(cm: number) {//zgor napišeš koliko cm naj pelje</field>
+                                        <field name="LINE1">    motors.resetAll()//resetira vse motorje</field>
+                                        <field name="LINE2">    while (Math.abs(motors.largeB.angle()) &lt; 360 * (cm / 29)) {//zračuna cm</field>
+                                        <field name="LINE3">        popravek = sensors.gyro3.angle() * 1.5 //popravek je enak kotu gyro senzorja 3</field>
+                                        <field name="LINE4">        motors.largeBC.steer(popravek, 25)//kot popravka napiše not in vozi z močjo 30</field>
+                                        <field name="LINE5">        brick.showString("Popravek", 7)</field>
+                                        <field name="LINE6">        brick.showNumber(popravek, 8)//na koci pokaže popravek</field>
+                                        <field name="LINE7"></field>
+                                        <field name="LINE8">    }</field>
+                                        <field name="LINE9">    motors.stopAll()</field>
+                                        <field name="LINE10">    motors.largeBC.setBrake(true)</field>
+                                        <field name="LINE11">}</field>
+                                        <next>
+                                          <block type="typescript_statement" editable="false">
+                                            <mutation line0="function do_crte(svetlost: number, moc: number, senzor: number) {" line1="    motors.largeBC.setInverted(true)" line2="    //če rabimo senzor ena" line3="    if (senzor = 1) {" line4="        while (sensors.color1.light(LightIntensityMode.Reflected) &lt; svetlost) {" line5="            motors.largeBC.tank(moc, moc)" line6="        }" line7="        motors.stopAll()" line8="    }" line9="    //če rabimo senzor dva" line10="    if (senzor = 2) {" line11="        while (sensors.color2.light(LightIntensityMode.Reflected) &lt; svetlost) {" line12="            motors.largeBC.tank(moc, moc)" line13="        }" line14="        motors.stopAll()" line15="    }" line16="}" numlines="17"></mutation>
+                                            <field name="LINE0">function do_crte(svetlost: number, moc: number, senzor: number) {</field>
+                                            <field name="LINE1">    motors.largeBC.setInverted(true)</field>
+                                            <field name="LINE2">    //če rabimo senzor ena</field>
+                                            <field name="LINE3">    if (senzor = 1) {</field>
+                                            <field name="LINE4">        while (sensors.color1.light(LightIntensityMode.Reflected) &lt; svetlost) {</field>
+                                            <field name="LINE5">            motors.largeBC.tank(moc, moc)</field>
+                                            <field name="LINE6">        }</field>
+                                            <field name="LINE7">        motors.stopAll()</field>
+                                            <field name="LINE8">    }</field>
+                                            <field name="LINE9">    //če rabimo senzor dva</field>
+                                            <field name="LINE10">    if (senzor = 2) {</field>
+                                            <field name="LINE11">        while (sensors.color2.light(LightIntensityMode.Reflected) &lt; svetlost) {</field>
+                                            <field name="LINE12">            motors.largeBC.tank(moc, moc)</field>
+                                            <field name="LINE13">        }</field>
+                                            <field name="LINE14">        motors.stopAll()</field>
+                                            <field name="LINE15">    }</field>
+                                            <field name="LINE16">}</field>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="buttonEvent" x="1056" y="20">
+    <field name="button">brick.buttonLeft</field>
+    <field name="event">ButtonEvent.Pressed</field>
+    <comment pinned="false" h="120" w="160">MISIJA 5(PUKL)</comment>
+    <statement name="HANDLER">
+      <block type="motorSetInverted">
+        <field name="motor">motors.largeBC</field>
+        <value name="reversed">
+          <shadow type="toggleOnOff">
+            <field name="on">true</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="motorPairTank">
+            <mutation _expanded="2" _input_init="true"></mutation>
+            <field name="motors">motors.largeBC</field>
+            <field name="unit">MoveUnit.Rotations</field>
+            <value name="speedLeft">
+              <shadow type="motorSpeedPicker">
+                <field name="speed">30</field>
+              </shadow>
+            </value>
+            <value name="speedRight">
+              <shadow type="motorSpeedPicker">
+                <field name="speed">30</field>
+              </shadow>
+            </value>
+            <value name="value">
+              <shadow type="math_number">
+                <field name="NUM">-3.7</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="motorRun">
+                <mutation _expanded="2" _input_init="true"></mutation>
+                <field name="motor">motors.mediumA</field>
+                <field name="unit">MoveUnit.Seconds</field>
+                <value name="speed">
+                  <shadow type="motorSpeedPicker">
+                    <field name="speed">100</field>
+                  </shadow>
+                </value>
+                <value name="value">
+                  <shadow type="math_number">
+                    <field name="NUM">0.8</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="motorRun">
+                    <mutation _expanded="2" _input_init="true"></mutation>
+                    <field name="motor">motors.largeB</field>
+                    <field name="unit">MoveUnit.Rotations</field>
+                    <value name="speed">
+                      <shadow type="motorSpeedPicker">
+                        <field name="speed">30</field>
+                      </shadow>
+                    </value>
+                    <value name="value">
+                      <shadow type="math_number">
+                        <field name="NUM">0.25</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="motorPairTank">
+                        <mutation _expanded="2" _input_init="true"></mutation>
+                        <field name="motors">motors.largeBC</field>
+                        <field name="unit">MoveUnit.Rotations</field>
+                        <value name="speedLeft">
+                          <shadow type="motorSpeedPicker">
+                            <field name="speed">30</field>
+                          </shadow>
+                        </value>
+                        <value name="speedRight">
+                          <shadow type="motorSpeedPicker">
+                            <field name="speed">30</field>
+                          </shadow>
+                        </value>
+                        <value name="value">
+                          <shadow type="math_number">
+                            <field name="NUM">-0.9</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="motorPairTank">
+                            <mutation _expanded="1" _input_init="true"></mutation>
+                            <field name="motors">motors.largeBC</field>
+                            <field name="unit">MoveUnit.Rotations</field>
+                            <value name="speedLeft">
+                              <shadow type="motorSpeedPicker">
+                                <field name="speed">30</field>
+                              </shadow>
+                            </value>
+                            <value name="speedRight">
+                              <shadow type="motorSpeedPicker">
+                                <field name="speed">0.5</field>
+                              </shadow>
+                            </value>
+                            <value name="value">
+                              <block type="typescript_expression" editable="false">
+                                <field name="EXPRESSION">MoveUnit.Rotations</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="typescript_statement" editable="false">
+                                <mutation line0="do_crte(90, 30, 1)" numlines="1"></mutation>
+                                <field name="LINE0">do_crte(90, 30, 1)</field>
+                                <next>
+                                  <block type="control_wait_us">
+                                    <value name="micros">
+                                      <shadow type="math_number">
+                                        <field name="NUM">200000</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="motorRun">
+                                        <mutation _expanded="2" _input_init="true"></mutation>
+                                        <field name="motor">motors.largeB</field>
+                                        <field name="unit">MoveUnit.Rotations</field>
+                                        <value name="speed">
+                                          <shadow type="motorSpeedPicker">
+                                            <field name="speed">30</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="value">
+                                          <shadow type="math_number">
+                                            <field name="NUM">-0.9</field>
+                                          </shadow>
+                                        </value>
+                                        <next>
+                                          <block type="motorPairTank">
+                                            <mutation _expanded="2" _input_init="true"></mutation>
+                                            <field name="motors">motors.largeBC</field>
+                                            <field name="unit">MoveUnit.Rotations</field>
+                                            <value name="speedLeft">
+                                              <shadow type="motorSpeedPicker">
+                                                <field name="speed">30</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="speedRight">
+                                              <shadow type="motorSpeedPicker">
+                                                <field name="speed">30</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="value">
+                                              <shadow type="math_number">
+                                                <field name="NUM">2.4</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="buttonEvent" x="1835" y="20">
+    <field name="button">brick.buttonUp</field>
+    <field name="event">ButtonEvent.Pressed</field>
+    <comment pinned="false" h="120" w="160">MISIJA 1()</comment>
+    <statement name="HANDLER">
+      <block type="motorSetInverted">
+        <field name="motor">motors.largeBC</field>
+        <value name="reversed">
+          <shadow type="toggleOnOff">
+            <field name="on">true</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="typescript_statement" editable="false">
+            <mutation line0="pospesevanje(50)" numlines="1"></mutation>
+            <field name="LINE0">pospesevanje(50)</field>
+            <next>
+              <block type="typescript_statement" editable="false">
+                <mutation line0="vozi_ravno(40)" numlines="1"></mutation>
+                <field name="LINE0">vozi_ravno(40)</field>
+                <next>
+                  <block type="typescript_statement" editable="false">
+                    <mutation line0="do_crte(90, 30, 2)" numlines="1"></mutation>
+                    <field name="LINE0">do_crte(90, 30, 2)</field>
+                    <next>
+                      <block type="motorStopAll">
+                        <next>
+                          <block type="control_wait_us">
+                            <value name="micros">
+                              <shadow type="math_number">
+                                <field name="NUM">1000</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="motorRun">
+                                <mutation _expanded="2" _input_init="true"></mutation>
+                                <field name="motor">motors.mediumD</field>
+                                <field name="unit">MoveUnit.Rotations</field>
+                                <value name="speed">
+                                  <shadow type="motorSpeedPicker">
+                                    <field name="speed">30</field>
+                                  </shadow>
+                                </value>
+                                <value name="value">
+                                  <shadow type="math_number">
+                                    <field name="NUM">-2.2</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="motorPairTank">
+                                    <mutation _expanded="2" _input_init="true"></mutation>
+                                    <field name="motors">motors.largeBC</field>
+                                    <field name="unit">MoveUnit.Rotations</field>
+                                    <value name="speedLeft">
+                                      <shadow type="motorSpeedPicker">
+                                        <field name="speed">25</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="speedRight">
+                                      <shadow type="motorSpeedPicker">
+                                        <field name="speed">25</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="value">
+                                      <shadow type="math_number">
+                                        <field name="NUM">-0.2</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="control_wait_us">
+                                        <value name="micros">
+                                          <shadow type="math_number">
+                                            <field name="NUM">2000000</field>
+                                          </shadow>
+                                        </value>
+                                        <next>
+                                          <block type="typescript_statement" editable="false">
+                                            <mutation line0="for (i = 0; i &lt; 18; i++) {" line1="        motors.mediumA.run(100, -0.3, MoveUnit.Rotations)" line2="        control.waitMicros(20000)" line3="        motors.mediumA.run(100, 0.3, MoveUnit.Rotations)" line4="        control.waitMicros(20000)" line5="    }" numlines="6"></mutation>
+                                            <field name="LINE0">for (i = 0; i &lt; 18; i++) {</field>
+                                            <field name="LINE1">        motors.mediumA.run(100, -0.3, MoveUnit.Rotations)</field>
+                                            <field name="LINE2">        control.waitMicros(20000)</field>
+                                            <field name="LINE3">        motors.mediumA.run(100, 0.3, MoveUnit.Rotations)</field>
+                                            <field name="LINE4">        control.waitMicros(20000)</field>
+                                            <field name="LINE5">    }</field>
+                                            <next>
+                                              <block type="motorRun">
+                                                <mutation _expanded="2" _input_init="true"></mutation>
+                                                <field name="motor">motors.mediumA</field>
+                                                <field name="unit">MoveUnit.Rotations</field>
+                                                <value name="speed">
+                                                  <shadow type="motorSpeedPicker">
+                                                    <field name="speed">100</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="value">
+                                                  <shadow type="math_number">
+                                                    <field name="NUM">-1</field>
+                                                  </shadow>
+                                                </value>
+                                                <next>
+                                                  <block type="motorPairTank">
+                                                    <mutation _expanded="2" _input_init="true"></mutation>
+                                                    <field name="motors">motors.largeBC</field>
+                                                    <field name="unit">MoveUnit.Rotations</field>
+                                                    <value name="speedLeft">
+                                                      <shadow type="motorSpeedPicker">
+                                                        <field name="speed">30</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <value name="speedRight">
+                                                      <shadow type="motorSpeedPicker">
+                                                        <field name="speed">30</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <value name="value">
+                                                      <shadow type="math_number">
+                                                        <field name="NUM">-0.1</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <next>
+                                                      <block type="motorRun">
+                                                        <mutation _expanded="2" _input_init="true"></mutation>
+                                                        <field name="motor">motors.mediumD</field>
+                                                        <field name="unit">MoveUnit.Rotations</field>
+                                                        <value name="speed">
+                                                          <shadow type="motorSpeedPicker">
+                                                            <field name="speed">30</field>
+                                                          </shadow>
+                                                        </value>
+                                                        <value name="value">
+                                                          <shadow type="math_number">
+                                                            <field name="NUM">3</field>
+                                                          </shadow>
+                                                        </value>
+                                                        <next>
+                                                          <block type="motorPairTank">
+                                                            <mutation _expanded="2" _input_init="true"></mutation>
+                                                            <field name="motors">motors.largeBC</field>
+                                                            <field name="unit">MoveUnit.Rotations</field>
+                                                            <value name="speedLeft">
+                                                              <shadow type="motorSpeedPicker">
+                                                                <field name="speed">30</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <value name="speedRight">
+                                                              <shadow type="motorSpeedPicker">
+                                                                <field name="speed">30</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <value name="value">
+                                                              <shadow type="math_number">
+                                                                <field name="NUM">-0.2</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <next>
+                                                              <block type="motorRun">
+                                                                <mutation _expanded="2" _input_init="true"></mutation>
+                                                                <field name="motor">motors.largeC</field>
+                                                                <field name="unit">MoveUnit.Rotations</field>
+                                                                <value name="speed">
+                                                                  <shadow type="motorSpeedPicker">
+                                                                    <field name="speed">50</field>
+                                                                  </shadow>
+                                                                </value>
+                                                                <value name="value">
+                                                                  <shadow type="math_number">
+                                                                    <field name="NUM">-0.25</field>
+                                                                  </shadow>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="motorRun">
+                                                                    <mutation _expanded="2" _input_init="true"></mutation>
+                                                                    <field name="motor">motors.mediumA</field>
+                                                                    <field name="unit">MoveUnit.Rotations</field>
+                                                                    <value name="speed">
+                                                                      <shadow type="motorSpeedPicker">
+                                                                        <field name="speed">100</field>
+                                                                      </shadow>
+                                                                    </value>
+                                                                    <value name="value">
+                                                                      <shadow type="math_number">
+                                                                        <field name="NUM">-3</field>
+                                                                      </shadow>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="motorPairTank">
+                                                                        <mutation _expanded="2" _input_init="true"></mutation>
+                                                                        <field name="motors">motors.largeBC</field>
+                                                                        <field name="unit">MoveUnit.Rotations</field>
+                                                                        <value name="speedLeft">
+                                                                          <shadow type="motorSpeedPicker">
+                                                                            <field name="speed">30</field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                        <value name="speedRight">
+                                                                          <shadow type="motorSpeedPicker">
+                                                                            <field name="speed">30</field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                        <value name="value">
+                                                                          <shadow type="math_number">
+                                                                            <field name="NUM">0.2</field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                        <next>
+                                                                          <block type="motorRun">
+                                                                            <mutation _expanded="2" _input_init="true"></mutation>
+                                                                            <field name="motor">motors.largeB</field>
+                                                                            <field name="unit">MoveUnit.Rotations</field>
+                                                                            <value name="speed">
+                                                                              <shadow type="motorSpeedPicker">
+                                                                                <field name="speed">10</field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                            <value name="value">
+                                                                              <shadow type="math_number">
+                                                                                <field name="NUM">-0.3</field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                            <next>
+                                                                              <block type="motorPairTank">
+                                                                                <mutation _expanded="2" _input_init="true"></mutation>
+                                                                                <field name="motors">motors.largeBC</field>
+                                                                                <field name="unit">MoveUnit.Rotations</field>
+                                                                                <value name="speedLeft">
+                                                                                  <shadow type="motorSpeedPicker">
+                                                                                    <field name="speed">10</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                                <value name="speedRight">
+                                                                                  <shadow type="motorSpeedPicker">
+                                                                                    <field name="speed">10</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                                <value name="value">
+                                                                                  <shadow type="math_number">
+                                                                                    <field name="NUM">0.9</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                                <next>
+                                                                                  <block type="motorPairTank">
+                                                                                    <mutation _expanded="2" _input_init="true"></mutation>
+                                                                                    <field name="motors">motors.largeBC</field>
+                                                                                    <field name="unit">MoveUnit.Rotations</field>
+                                                                                    <value name="speedLeft">
+                                                                                      <shadow type="motorSpeedPicker">
+                                                                                        <field name="speed">30</field>
+                                                                                      </shadow>
+                                                                                    </value>
+                                                                                    <value name="speedRight">
+                                                                                      <shadow type="motorSpeedPicker">
+                                                                                        <field name="speed">30</field>
+                                                                                      </shadow>
+                                                                                    </value>
+                                                                                    <value name="value">
+                                                                                      <shadow type="math_number">
+                                                                                        <field name="NUM">-1</field>
+                                                                                      </shadow>
+                                                                                    </value>
+                                                                                    <next>
+                                                                                      <block type="motorRun">
+                                                                                        <mutation _expanded="2" _input_init="true"></mutation>
+                                                                                        <field name="motor">motors.largeC</field>
+                                                                                        <field name="unit">MoveUnit.Rotations</field>
+                                                                                        <value name="speed">
+                                                                                          <shadow type="motorSpeedPicker">
+                                                                                            <field name="speed">30</field>
+                                                                                          </shadow>
+                                                                                        </value>
+                                                                                        <value name="value">
+                                                                                          <shadow type="math_number">
+                                                                                            <field name="NUM">1</field>
+                                                                                          </shadow>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                          <block type="motorPairTank">
+                                                                                            <mutation _expanded="2" _input_init="true"></mutation>
+                                                                                            <field name="motors">motors.largeBC</field>
+                                                                                            <field name="unit">MoveUnit.Rotations</field>
+                                                                                            <value name="speedLeft">
+                                                                                              <shadow type="motorSpeedPicker">
+                                                                                                <field name="speed">100</field>
+                                                                                              </shadow>
+                                                                                            </value>
+                                                                                            <value name="speedRight">
+                                                                                              <shadow type="motorSpeedPicker">
+                                                                                                <field name="speed">100</field>
+                                                                                              </shadow>
+                                                                                            </value>
+                                                                                            <value name="value">
+                                                                                              <shadow type="math_number">
+                                                                                                <field name="NUM">-2.5</field>
+                                                                                              </shadow>
+                                                                                            </value>
+                                                                                          </block>
+                                                                                        </next>
+                                                                                      </block>
+                                                                                    </next>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="buttonEvent" x="2510" y="20">
+    <field name="button">brick.buttonEnter</field>
+    <field name="event">ButtonEvent.Pressed</field>
+    <comment pinned="false" h="120" w="160">MISIJA 2(ORTODONT)</comment>
+    <statement name="HANDLER">
+      <block type="motorSetInverted">
+        <field name="motor">motors.largeBC</field>
+        <value name="reversed">
+          <shadow type="toggleOnOff">
+            <field name="on">true</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="typescript_statement" editable="false">
+            <mutation line0="pospesevanje(25)" numlines="1"></mutation>
+            <field name="LINE0">pospesevanje(25)</field>
+            <next>
+              <block type="motorPairTank">
+                <mutation _expanded="2" _input_init="true"></mutation>
+                <field name="motors">motors.largeBC</field>
+                <field name="unit">MoveUnit.Rotations</field>
+                <value name="speedLeft">
+                  <shadow type="motorSpeedPicker">
+                    <field name="speed">25</field>
+                  </shadow>
+                </value>
+                <value name="speedRight">
+                  <shadow type="motorSpeedPicker">
+                    <field name="speed">25</field>
+                  </shadow>
+                </value>
+                <value name="value">
+                  <shadow type="math_number">
+                    <field name="NUM">1.8</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="motorRun">
+                    <mutation _expanded="2" _input_init="true"></mutation>
+                    <field name="motor">motors.mediumD</field>
+                    <field name="unit">MoveUnit.Rotations</field>
+                    <value name="speed">
+                      <shadow type="motorSpeedPicker">
+                        <field name="speed">25</field>
+                      </shadow>
+                    </value>
+                    <value name="value">
+                      <shadow type="math_number">
+                        <field name="NUM">2</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="motorPairTank">
+                        <mutation _expanded="2" _input_init="true"></mutation>
+                        <field name="motors">motors.largeBC</field>
+                        <field name="unit">MoveUnit.Rotations</field>
+                        <value name="speedLeft">
+                          <shadow type="motorSpeedPicker">
+                            <field name="speed">10</field>
+                          </shadow>
+                        </value>
+                        <value name="speedRight">
+                          <shadow type="motorSpeedPicker">
+                            <field name="speed">10</field>
+                          </shadow>
+                        </value>
+                        <value name="value">
+                          <shadow type="math_number">
+                            <field name="NUM">1</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="motorRun">
+                            <mutation _expanded="2" _input_init="true"></mutation>
+                            <field name="motor">motors.mediumD</field>
+                            <field name="unit">MoveUnit.Rotations</field>
+                            <value name="speed">
+                              <shadow type="motorSpeedPicker">
+                                <field name="speed">25</field>
+                              </shadow>
+                            </value>
+                            <value name="value">
+                              <shadow type="math_number">
+                                <field name="NUM">-1</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="motorPairSteer">
+                                <mutation _expanded="2" _input_init="true"></mutation>
+                                <field name="chassis">motors.largeBC</field>
+                                <field name="unit">MoveUnit.Rotations</field>
+                                <value name="turnRatio">
+                                  <shadow type="motorTurnRatioPicker"></shadow>
+                                  <block type="math_number">
+                                    <field name="NUM">-41</field>
+                                  </block>
+                                </value>
+                                <value name="speed">
+                                  <shadow type="motorSpeedPicker">
+                                    <field name="speed">30</field>
+                                  </shadow>
+                                </value>
+                                <value name="value">
+                                  <shadow type="math_number">
+                                    <field name="NUM">0.5</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="motorPairSteer">
+                                    <mutation _expanded="2" _input_init="true"></mutation>
+                                    <field name="chassis">motors.largeBC</field>
+                                    <field name="unit">MoveUnit.Rotations</field>
+                                    <value name="turnRatio">
+                                      <shadow type="motorTurnRatioPicker"></shadow>
+                                      <block type="math_number">
+                                        <field name="NUM">41</field>
+                                      </block>
+                                    </value>
+                                    <value name="speed">
+                                      <shadow type="motorSpeedPicker">
+                                        <field name="speed">30</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="value">
+                                      <shadow type="math_number">
+                                        <field name="NUM">0.5</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="typescript_statement" editable="false">
+                                        <mutation line0="do_crte(90, 30, 2)" numlines="1"></mutation>
+                                        <field name="LINE0">do_crte(90, 30, 2)</field>
+                                        <next>
+                                          <block type="motorRun">
+                                            <mutation _expanded="2" _input_init="true"></mutation>
+                                            <field name="motor">motors.mediumD</field>
+                                            <field name="unit">MoveUnit.Rotations</field>
+                                            <value name="speed">
+                                              <shadow type="motorSpeedPicker">
+                                                <field name="speed">100</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="value">
+                                              <shadow type="math_number">
+                                                <field name="NUM">-2</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="motorPairTank">
+                                                <mutation _expanded="2" _input_init="true"></mutation>
+                                                <field name="motors">motors.largeBC</field>
+                                                <field name="unit">MoveUnit.Rotations</field>
+                                                <value name="speedLeft">
+                                                  <shadow type="motorSpeedPicker">
+                                                    <field name="speed">30</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="speedRight">
+                                                  <shadow type="motorSpeedPicker">
+                                                    <field name="speed">30</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="value">
+                                                  <shadow type="math_number">
+                                                    <field name="NUM">1</field>
+                                                  </shadow>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="buttonEvent" x="3297" y="20">
+    <field name="button">brick.buttonDown</field>
+    <field name="event">ButtonEvent.Pressed</field>
+    <comment pinned="false" h="120" w="160">MISIJA 3(JAJCA NA OKO)</comment>
+    <statement name="HANDLER">
+      <block type="motorSetInverted">
+        <field name="motor">motors.largeBC</field>
+        <value name="reversed">
+          <shadow type="toggleOnOff">
+            <field name="on">true</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="typescript_statement" editable="false">
+            <mutation line0="pospesevanje(20)" numlines="1"></mutation>
+            <field name="LINE0">pospesevanje(20)</field>
+            <next>
+              <block type="motorPairTank">
+                <mutation _expanded="2" _input_init="true"></mutation>
+                <field name="motors">motors.largeBC</field>
+                <field name="unit">MoveUnit.Rotations</field>
+                <value name="speedLeft">
+                  <shadow type="motorSpeedPicker">
+                    <field name="speed">10</field>
+                  </shadow>
+                </value>
+                <value name="speedRight">
+                  <shadow type="motorSpeedPicker">
+                    <field name="speed">10</field>
+                  </shadow>
+                </value>
+                <value name="value">
+                  <shadow type="math_number">
+                    <field name="NUM">2.2</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="motorRun">
+                    <mutation _expanded="2" _input_init="true"></mutation>
+                    <field name="motor">motors.largeC</field>
+                    <field name="unit">MoveUnit.Rotations</field>
+                    <value name="speed">
+                      <shadow type="motorSpeedPicker">
+                        <field name="speed">30</field>
+                      </shadow>
+                    </value>
+                    <value name="value">
+                      <shadow type="math_number">
+                        <field name="NUM">0.7</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="motorPairTank">
+                        <mutation _expanded="2" _input_init="true"></mutation>
+                        <field name="motors">motors.largeBC</field>
+                        <field name="unit">MoveUnit.Rotations</field>
+                        <value name="speedLeft">
+                          <shadow type="motorSpeedPicker">
+                            <field name="speed">100</field>
+                          </shadow>
+                        </value>
+                        <value name="speedRight">
+                          <shadow type="motorSpeedPicker">
+                            <field name="speed">100</field>
+                          </shadow>
+                        </value>
+                        <value name="value">
+                          <shadow type="math_number">
+                            <field name="NUM">-3</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="forever" x="20" y="2305">
+    <statement name="HANDLER">
+      <block type="screen_print">
+        <value name="text">
+          <shadow type="text">
+            <field name="TEXT">Color 1</field>
+          </shadow>
+        </value>
+        <value name="line">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="screenShowNumber">
+            <value name="name">
+              <block type="colorLight">
+                <field name="this">sensors.color1</field>
+                <field name="mode">LightIntensityMode.Reflected</field>
+              </block>
+            </value>
+            <value name="line">
+              <shadow type="math_number">
+                <field name="NUM">2</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="screen_print">
+                <value name="text">
+                  <shadow type="text">
+                    <field name="TEXT">Color 2</field>
+                  </shadow>
+                </value>
+                <value name="line">
+                  <shadow type="math_number">
+                    <field name="NUM">3</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="screenShowNumber">
+                    <value name="name">
+                      <block type="colorLight">
+                        <field name="this">sensors.color2</field>
+                        <field name="mode">LightIntensityMode.Reflected</field>
+                      </block>
+                    </value>
+                    <value name="line">
+                      <shadow type="math_number">
+                        <field name="NUM">4</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="screen_print">
+                        <value name="text">
+                          <shadow type="text">
+                            <field name="TEXT">Gyro 3</field>
+                          </shadow>
+                        </value>
+                        <value name="line">
+                          <shadow type="math_number">
+                            <field name="NUM">5</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="screenShowNumber">
+                            <value name="name">
+                              <block type="gyroGetAngle">
+                                <field name="this">sensors.gyro3</field>
+                              </block>
+                            </value>
+                            <value name="line">
+                              <shadow type="math_number">
+                                <field name="NUM">6</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="buttonEvent" x="690" y="2305">
+    <field name="button">brick.buttonRight</field>
+    <field name="event">ButtonEvent.Pressed</field>
+    <comment pinned="false" h="120" w="160">MISIJA 4(GIGANTSKI STOLP)</comment>
+    <statement name="HANDLER">
+      <block type="motorSetInverted">
+        <field name="motor">motors.largeBC</field>
+        <value name="reversed">
+          <shadow type="toggleOnOff">
+            <field name="on">true</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="motorPairTank">
+            <mutation _expanded="2" _input_init="true"></mutation>
+            <field name="motors">motors.largeBC</field>
+            <field name="unit">MoveUnit.Rotations</field>
+            <value name="speedLeft">
+              <shadow type="motorSpeedPicker">
+                <field name="speed">30</field>
+              </shadow>
+            </value>
+            <value name="speedRight">
+              <shadow type="motorSpeedPicker">
+                <field name="speed">30</field>
+              </shadow>
+            </value>
+            <value name="value">
+              <shadow type="math_number">
+                <field name="NUM">3</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="motorPairTank">
+                <mutation _expanded="2" _input_init="true"></mutation>
+                <field name="motors">motors.largeBC</field>
+                <field name="unit">MoveUnit.Rotations</field>
+                <value name="speedLeft">
+                  <shadow type="motorSpeedPicker">
+                    <field name="speed">100</field>
+                  </shadow>
+                </value>
+                <value name="speedRight">
+                  <shadow type="motorSpeedPicker">
+                    <field name="speed">100</field>
+                  </shadow>
+                </value>
+                <value name="value">
+                  <shadow type="math_number">
+                    <field name="NUM">-3.5</field>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
